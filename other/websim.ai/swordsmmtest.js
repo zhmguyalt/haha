@@ -14,7 +14,7 @@ const swordEditor = `
         }
 
         body {
-            background-color: #000000;
+            background-color: transparent;
             color: white;
             font-family: 'Courier New', monospace;
             min-height: 100vh;
