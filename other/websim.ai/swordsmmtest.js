@@ -1,92 +1,13 @@
 // SWORD Code Editor - All in one JavaScript file
 const swordEditor = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWORD Code Editor</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: transparent;
-            color: white;
-            font-family: 'Courier New', monospace;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        .code-container {
-            width: 100%;
-            max-width: 400px;
-            background: rgba(26, 26, 26, 0.8);
-            padding: 15px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            cursor: move;
-            backdrop-filter: blur(5px);
-            border: 1px solid #444;
-        }
-
-        .sword-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-            cursor: move;
-            user-select: none;
-        }
-
-        .code-editor {
-            width: 100%;
-            height: 150px;
-            background: rgba(45, 45, 45, 0.9);
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            resize: none;
-            outline: none;
-            display: block;
-        }
-
-        .buttons-container {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        button {
-            padding: 6px 12px;
-            background: #4a4a4a;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            flex: 1;
-        }
-    </style>
-</head>
-<body>
-    <div class="code-container" id="codeContainer">
-        <div class="sword-text" id="swordText">SWORD</div>
-        <textarea id="codeEditor" class="code-editor" placeholder="Code here..."></textarea>
-        <div class="buttons-container">
-            <button id="runButton">Run</button>
-            <button id="attachButton">Attach</button>
-        </div>
+<div class="code-container" id="codeContainer">
+    <div class="sword-text" id="swordText">SWORD</div>
+    <textarea id="codeEditor" class="code-editor" placeholder="Code here..."></textarea>
+    <div class="buttons-container">
+        <button id="runButton">Run</button>
+        <button id="attachButton">Attach</button>
     </div>
-</body>
-</html>
+</div>
 `;
 
 // Available files for editing
@@ -103,8 +24,10 @@ let dragOffset = { x: 0, y: 0 };
 
 // Function to initialize the editor
 function initSwordEditor() {
-    // Write the HTML to document
-    document.write(swordEditor);
+    // Append the editor to the document instead of overwriting
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = swordEditor;
+    document.body.appendChild(tempDiv.firstElementChild);
 
     // Add event listeners after DOM is loaded
     setTimeout(() => {
