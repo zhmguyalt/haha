@@ -18,24 +18,21 @@ const swordEditor = `
             color: white;
             font-family: 'Courier New', monospace;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
             overflow: hidden;
         }
 
         .code-container {
             width: 100%;
             max-width: 400px;
-            background: #1a1a1a;
+            background: rgba(26, 26, 26, 0.8);
             padding: 15px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             cursor: move;
+            backdrop-filter: blur(5px);
+            border: 1px solid #444;
         }
 
         .sword-text {
@@ -50,7 +47,7 @@ const swordEditor = `
         .code-editor {
             width: 100%;
             height: 150px;
-            background: #2d2d2d;
+            background: rgba(45, 45, 45, 0.9);
             color: #ffffff;
             border: none;
             padding: 10px;
@@ -260,11 +257,11 @@ function showOutput(message, type) {
 
     // Style based on type
     if (type === 'error') {
-        outputDiv.style.background = '#4a1a1a';
+        outputDiv.style.background = 'rgba(74, 26, 26, 0.8)';
         outputDiv.style.border = '1px solid #ff6b6b';
         outputDiv.style.color = '#ff6b6b';
     } else {
-        outputDiv.style.background = '#1a4a2d';
+        outputDiv.style.background = 'rgba(26, 74, 45, 0.8)';
         outputDiv.style.border = '1px solid #4caf50';
         outputDiv.style.color = '#4caf50';
     }
