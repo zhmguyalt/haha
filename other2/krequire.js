@@ -4,7 +4,7 @@
   if (window.KREQUIRE_LOADED) return;
   window.KREQUIRE_LOADED = true;
   
-  const TOKEN_CDN = 'https://github.com/zhmguyalt/haha/new/main/other2';
+  const TOKEN_CDN = 'https://raw.githubusercontent.com/zhmguyalt/haha/main/other2/tokenz/';
   const cache = new Map();
   
   window.require = async function(token) {
