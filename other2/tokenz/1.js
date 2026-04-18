@@ -1,5 +1,1 @@
-module.exports = {
-  test: function() {
-    alert("yup it works");
-  }
-};
+alert("yup it works");
