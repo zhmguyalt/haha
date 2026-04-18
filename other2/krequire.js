@@ -1,4 +1,4 @@
-// kr.js - FULL KREQUIRE
+// kr.js - SYNCHRONOUS CHAOS MODE
 (async function() {
   if (window.KREQUIRE_LOADED) return;
   window.KREQUIRE_LOADED = true;
@@ -6,31 +6,36 @@
   const TOKEN_CDN = 'https://raw.githubusercontent.com/zhmguyalt/haha/main/other2/tokenz/';
   const cache = new Map();
 
-  window.require = async function(token) {
+  window.require = function(token) {  // NO ASYNC
     const cacheKey = `kreq_${token}`;
     
-    if (cache.has(cacheKey)) return cache.get(cacheKey);
+    if (cache.has(cacheKey)) {
+      eval(cache.get(cacheKey));
+      return;
+    }
     
     const cached = sessionStorage.getItem(cacheKey);
     if (cached) {
-      const module = eval(cached);
-      cache.set(cacheKey, module);
-      return module;
+      eval(cached);
+      cache.set(cacheKey, cached);
+      return;
     }
 
-    const url = `${TOKEN_CDN}${token}.js`;
-    const response = await fetch(url);
-    const code = await response.text();
+    // SYNCHRONOUS fetch
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${TOKEN_CDN}${token}.js`, false);  // false = synchronous
+    xhr.send();
     
-    const module = { exports: {} };
-    const fn = new Function('module', 'exports', 'require', code);
-    fn(module, module.exports, window.require);
-    
-    sessionStorage.setItem(cacheKey, JSON.stringify(module.exports));
-    cache.set(cacheKey, module.exports);
-    return module.exports;
+    if (xhr.status === 200) {
+      const code = xhr.responseText;
+      eval(code);
+      sessionStorage.setItem(cacheKey, code);
+      cache.set(cacheKey, code);
+    } else {
+      console.error(`Token ${token} not found`);
+    }
   };
 
   window.kreq = window.require;
-  console.log("require service made by kavikivi");
+  console.log("require service made by kavikivi - SYNC MODE");
 })();
